@@ -2,6 +2,6 @@
 // and on native platforms to TinkLinkNative.ts
 import TinkLinkNativeModule from "./src/TinkLinkNativeModule";
 
-export function startTinkLinkSDK(): string {
-  return TinkLinkNativeModule.startSDK();
+export function startTinkLinkSDK(clientID: string, redirectURI: string): void {
+  return TinkLinkNativeModule.startSDK(clientID, redirectURI);
 }

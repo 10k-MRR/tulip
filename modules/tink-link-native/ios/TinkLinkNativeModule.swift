@@ -5,9 +5,9 @@ public class TinkLinkNativeModule: Module {
   public func definition() -> ModuleDefinition {
     Name("TinkLinkNative")
 
-    Function("startSDK") {
+    Function("startSDK") { (clientID: String, redirectURI: String) -> Void in 
       let sdk = TinkLinkSDK()
-      sdk.startSDK()
+      sdk.startSDK(clientID: clientID, redirectURI: redirectURI)
     }
   }
 }
@@ -21,9 +21,9 @@ class TinkLinkSDK: UIViewController {
 
   
   @objc
-  func startSDK() {
+  func startSDK(clientID: String, redirectURI: String) {
     DispatchQueue.main.async {
-        let configuration = Configuration(clientID: "94da0d0f91184c3fa0d8de8beee4d84e", redirectURI: "https://console.tink.com/callback", baseDomain: .eu)
+        let configuration = Configuration(clientID: clientID, redirectURI: redirectURI, baseDomain: .eu)
         let viewController = Tink.Transactions.connectAccountsForOneTimeAccess(configuration: configuration, market: Market("FR")) { result in
         }
         UIApplication.shared.windows.first?.rootViewController?.present(viewController, animated: true)
