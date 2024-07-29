@@ -1,7 +1,9 @@
 import { View, StyleSheet, Button } from "react-native";
+import { startTinkLinkSDK } from "../modules/tink-link-native";
 
 export default function Index() {
   const onPressHandle = () => {
+    startTinkLinkSDK();
     console.log("clicked");
   };
 
