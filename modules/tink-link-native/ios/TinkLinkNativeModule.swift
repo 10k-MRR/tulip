@@ -9,7 +9,7 @@ public class TinkLinkNativeModule: Module {
       let sdk = TinkLinkSDK()
       sdk.startSDK(clientID: clientID, redirectURI: redirectURI) { result in 
         self.sendEvent("succeed", [
-          "msg": result
+          "authCode": result
         ])
       }
     }

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function Index() {
   useEffect(() => {
     const sub = succeedListener((e) => {
-      console.log(e);
+      console.log(e.authCode);
     });
 
     return () => sub.remove();

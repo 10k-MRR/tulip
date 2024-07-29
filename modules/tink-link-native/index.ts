@@ -6,7 +6,7 @@ import { EventEmitter, Subscription } from "expo-modules-core";
 const emitter = new EventEmitter(TinkLinkNativeModule);
 
 export type SDKSucceedEvent = {
-  theme: string;
+  authCode: string;
 };
 
 export function startTinkLinkSDK(clientID: string, redirectURI: string) {
