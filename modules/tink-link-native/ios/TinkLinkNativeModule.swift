@@ -35,8 +35,8 @@ class TinkLinkSDK: UIViewController {
               case .success(let data):
                 completion(data.code!.rawValue)
                 UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
-              case .failure(let error):
-                completion("Failed")
+              case .failure(_):
+                completion("")
             }
           }
           UIApplication.shared.windows.first?.rootViewController?.present(viewController, animated: true)

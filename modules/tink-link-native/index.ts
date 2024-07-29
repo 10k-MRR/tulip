@@ -5,7 +5,7 @@ import { EventEmitter, Subscription } from "expo-modules-core";
 
 const emitter = new EventEmitter(TinkLinkNativeModule);
 
-export type SDKSucceedEvent = {
+export type TinkLinkBankAggrgationSucceedEvent = {
   authCode: string;
 };
 
@@ -13,8 +13,11 @@ export function startTinkLinkSDK(clientID: string, redirectURI: string) {
   return TinkLinkNativeModule.startSDK(clientID, redirectURI);
 }
 
-export function succeedListener(
-  listener: (event: SDKSucceedEvent) => void,
+export function tinkLinkBankAggregationSucceedListner(
+  listener: (event: TinkLinkBankAggrgationSucceedEvent) => void,
 ): Subscription {
-  return emitter.addListener<SDKSucceedEvent>("succeed", listener);
+  return emitter.addListener<TinkLinkBankAggrgationSucceedEvent>(
+    "succeed",
+    listener,
+  );
 }
