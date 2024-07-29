@@ -1,8 +1,17 @@
 import { View, StyleSheet, Button } from "react-native";
-import { startTinkLinkSDK } from "../modules/tink-link-native";
+import { startTinkLinkSDK, succeedListener } from "../modules/tink-link-native";
+import { useEffect } from "react";
 
 export default function Index() {
-  const onPressHandle = () => {
+  useEffect(() => {
+    const sub = succeedListener((e) => {
+      console.log(e);
+    });
+
+    return () => sub.remove();
+  }, []);
+
+  const onPressHandle = async () => {
     startTinkLinkSDK(
       process.env.EXPO_PUBLIC_TINK_CLIENT_ID!,
       process.env.EXPO_PUBLIC_TINK_REDIRECT_URL!,
