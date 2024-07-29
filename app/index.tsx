@@ -1,19 +1,19 @@
-import { Button, View } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 
 export default function Index() {
-  const onClick = () => {
-    console.log("clicked !");
+  const onPressHandle = () => {
+    console.log("clicked");
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Button title="click me" onPress={onClick} />
+    <View style={styles.container}>
+      <Button title="click me" onPress={onPressHandle} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

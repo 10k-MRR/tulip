@@ -1,9 +1,0 @@
-{
-  "platforms": ["ios", "android"],
-  "ios": {
-    "modules": ["TinkLinkNativeModule"]
-  },
-  "android": {
-    "modules": ["expo.modules.tinklinknative.TinkLinkNativeModule"]
-  }
-}
