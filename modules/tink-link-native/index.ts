@@ -5,19 +5,29 @@ import { EventEmitter, Subscription } from "expo-modules-core";
 
 const emitter = new EventEmitter(TinkLinkNativeModule);
 
-export type TinkLinkBankAggrgationSucceedEvent = {
-  authCode: string;
+export const CONNECT_ACCOUNTS_FOR_ONE_TIME_ACCESS =
+  "CONNECT_ACCOUNTS_FOR_ONE_TIME_ACCESS";
+
+export type ConnectAccountsForOneTimeAccessEvent = {
+  authCode: string | undefined;
+  error: string | undefined;
 };
 
-export function startTinkLinkSDK(clientID: string, redirectURI: string) {
-  return TinkLinkNativeModule.startSDK(clientID, redirectURI);
+export function connectAccountsForOneTimeAccess(
+  clientID: string,
+  redirectURI: string,
+) {
+  return TinkLinkNativeModule.connectAccountsForOneTimeAccess(
+    clientID,
+    redirectURI,
+  );
 }
 
-export function tinkLinkBankAggregationSucceedListner(
-  listener: (event: TinkLinkBankAggrgationSucceedEvent) => void,
+export function connectAccountsForOneTimeAccessListner(
+  listener: (event: ConnectAccountsForOneTimeAccessEvent) => void,
 ): Subscription {
-  return emitter.addListener<TinkLinkBankAggrgationSucceedEvent>(
-    "succeed",
+  return emitter.addListener<ConnectAccountsForOneTimeAccessEvent>(
+    CONNECT_ACCOUNTS_FOR_ONE_TIME_ACCESS,
     listener,
   );
 }

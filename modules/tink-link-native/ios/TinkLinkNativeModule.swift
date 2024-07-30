@@ -5,16 +5,16 @@ public class TinkLinkNativeModule: Module {
   public func definition() -> ModuleDefinition {
     Name("TinkLinkNative")
 
-    Function("startSDK") { (clientID: String, redirectURI: String) -> Void in 
+    Function("connectAccountsForOneTimeAccess") { (clientID: String, redirectURI: String) -> Void in 
       let sdk = TinkLinkSDK()
-      sdk.startSDK(clientID: clientID, redirectURI: redirectURI) { result in 
-        self.sendEvent("succeed", [
+      sdk.connectAccountsForOneTimeAccess(clientID: clientID, redirectURI: redirectURI) { result in 
+        self.sendEvent("CONNECT_ACCOUNTS_FOR_ONE_TIME_ACCESS", [
           "authCode": result
         ])
       }
     }
 
-    Events("succeed")
+    Events("CONNECT_ACCOUNTS_FOR_ONE_TIME_ACCESS")
   }
 }
 
@@ -27,7 +27,7 @@ class TinkLinkSDK: UIViewController {
 
   
   @objc
-  func startSDK(clientID: String, redirectURI: String, completion: @escaping (String)->()) {
+  func connectAccountsForOneTimeAccess(clientID: String, redirectURI: String, completion: @escaping (String)->()) {
       DispatchQueue.main.async {
           let configuration = Configuration(clientID: clientID, redirectURI: redirectURI, baseDomain: .eu)
           let viewController = Tink.Transactions.connectAccountsForOneTimeAccess(configuration: configuration, market: Market("FR")) { result in
