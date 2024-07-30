@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function RootLayout() {
   useEffect(() => {
     const sub = connectAccountsForOneTimeAccessListner((e) => {
-      console.log(e.authCode);
+      console.log(e);
     });
 
     return () => sub.remove();
