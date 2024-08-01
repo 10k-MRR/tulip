@@ -23,6 +23,9 @@ export default function RootLayout() {
 
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (!session || !session.user) {
+        router.replace("/auth/");
+      }
     });
 
     const sub = connectAccountsForOneTimeAccessListner((e) => {
@@ -43,7 +46,7 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
+    <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="auth" />
     </Stack>
