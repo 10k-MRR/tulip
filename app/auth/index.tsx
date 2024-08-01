@@ -1,11 +1,13 @@
 import Button from "@/components/ui/button";
+import Input from "@/components/ui/input";
 import { supabase } from "@/utils/supabase";
 import { router } from "expo-router";
 import { useState } from "react";
-import { View, StyleSheet, TextInput, Text, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView } from "react-native";
 
 export default function Index() {
   const [email, setEmail] = useState("");
+
   async function signInWithEmail() {
     const { error } = await supabase.auth.signInWithOtp({
       email: email,
@@ -21,12 +23,10 @@ export default function Index() {
       <View style={styles.card}>
         <Text style={styles.title}>Sign in</Text>
         <Text>Enter your email address to sign into your tulip account</Text>
-        <TextInput
-          style={styles.input}
+        <Input
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder="email@address.com"
-          autoCapitalize="none"
           autoComplete="email"
           keyboardType="email-address"
           returnKeyType="next"
@@ -50,14 +50,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 12,
     padding: 24,
-  },
-  input: {
-    height: 48,
-    borderWidth: 2,
-    borderColor: "#EEE",
-    borderRadius: 4,
-    padding: 12,
-    marginVertical: 12,
   },
   title: {
     fontFamily: "BebasNeue_400Regular",
