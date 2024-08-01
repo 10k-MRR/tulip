@@ -10,13 +10,16 @@ import * as AppleAuthentication from "expo-apple-authentication";
 
 export default function Index() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function signInWithEmail() {
+    setLoading(true);
     const { error } = await supabase.auth.signInWithOtp({
       email: email,
       options: {},
     });
     if (error === null) {
+      setLoading(false);
       router.replace("/auth/otp?email=" + email);
     }
   }
@@ -56,7 +59,11 @@ export default function Index() {
           keyboardType="email-address"
           returnKeyType="next"
         />
-        <Button title={i18n.t("auth.signin")} onPress={signInWithEmail} />
+        <Button
+          isLoading={loading}
+          title={i18n.t("auth.signin")}
+          onPress={signInWithEmail}
+        />
         <Text fontSize={16} nueu style={styles.separator}>
           {i18n.t("auth.or")}
         </Text>

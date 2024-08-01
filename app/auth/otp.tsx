@@ -10,10 +10,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Otp() {
   const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { email } = useLocalSearchParams<{ email: string }>();
 
   async function verifyOtp() {
+    setLoading(true);
     const {
       data: { session },
       error,
@@ -24,6 +26,7 @@ export default function Otp() {
     });
 
     if (error === null && session) {
+      setLoading(false);
       router.replace("/");
     }
   }
@@ -44,7 +47,11 @@ export default function Otp() {
           keyboardType="number-pad"
           returnKeyType="next"
         />
-        <Button title={i18n.t("auth.verify")} onPress={verifyOtp} />
+        <Button
+          isLoading={loading}
+          title={i18n.t("auth.verify")}
+          onPress={verifyOtp}
+        />
       </View>
       <Text fontSize={24} nueu style={styles.logo}>
         Tulip
