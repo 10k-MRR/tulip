@@ -87,12 +87,10 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 18,
     justifyContent: "space-between",
+    backgroundColor: "white",
   },
   card: {
-    backgroundColor: "white",
-    borderRadius: 12,
     padding: 24,
   },
   logo: {
