@@ -16,6 +16,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.lnk0.tulip",
       "usesAppleSignIn": true,
+      "userInterfaceStyle": "light",
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true
       }
