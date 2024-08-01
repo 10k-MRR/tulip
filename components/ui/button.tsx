@@ -1,20 +1,25 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { StyleSheet, Text, Pressable, ViewStyle } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Pressable,
+  ViewStyle,
+  PressableProps,
+} from "react-native";
 
-interface IProps {
+interface IProps extends PressableProps {
   title: string;
-  onPress: () => void;
-  styles?: ViewStyle;
+  style?: ViewStyle;
 }
 
-export default function Button({ title, onPress, styles }: IProps) {
+export default function Button({ title, onPress, style }: IProps) {
   const localStyles = ls(
     useThemeColor({}, "buttonText"),
     useThemeColor({}, "buttonBackground"),
   );
 
   return (
-    <Pressable style={[styles, localStyles.container]} onPress={onPress}>
+    <Pressable style={[style, localStyles.container]} onPress={onPress}>
       <Text style={localStyles.text}>{title}</Text>
     </Pressable>
   );

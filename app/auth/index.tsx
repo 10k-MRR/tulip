@@ -1,9 +1,10 @@
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
+import Text from "@/components/ui/text";
 import { supabase } from "@/utils/supabase";
 import { router } from "expo-router";
 import { useState } from "react";
-import { View, StyleSheet, Text, SafeAreaView } from "react-native";
+import { View, StyleSheet, SafeAreaView } from "react-native";
 
 export default function Index() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,9 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Sign in</Text>
+        <Text nueu fontSize={42}>
+          Sign in
+        </Text>
         <Text>Enter your email address to sign into your tulip account</Text>
         <Input
           onChangeText={(text) => setEmail(text)}
@@ -32,10 +35,14 @@ export default function Index() {
           returnKeyType="next"
         />
         <Button title="Sign in" onPress={signInWithEmail} />
-        <Text style={styles.separator}>or</Text>
+        <Text fontSize={16} nueu style={styles.separator}>
+          or
+        </Text>
         <Button title="Sign in with apple" onPress={signInWithEmail} />
       </View>
-      <Text style={styles.logo}>Tulip</Text>
+      <Text fontSize={24} nueu style={styles.logo}>
+        Tulip
+      </Text>
     </SafeAreaView>
   );
 }
@@ -51,19 +58,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 24,
   },
-  title: {
-    fontFamily: "BebasNeue_400Regular",
-    fontSize: 42,
-  },
   logo: {
-    fontFamily: "BebasNeue_400Regular",
-    fontSize: 24,
     textAlign: "center",
   },
   separator: {
     textAlign: "center",
     marginVertical: 12,
-    fontSize: 16,
-    fontWeight: "600",
   },
 });
