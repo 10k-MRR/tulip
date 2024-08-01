@@ -1,7 +1,7 @@
 import { supabase } from "@/utils/supabase";
 import { router } from "expo-router";
 import { useState } from "react";
-import { View, StyleSheet, TextInput, Button } from "react-native";
+import { View, StyleSheet, TextInput, Button, Text } from "react-native";
 
 export default function Index() {
   const [email, setEmail] = useState("");
@@ -19,6 +19,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
+        <Text style={styles.logo}>Tulip</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => setEmail(text)}
@@ -37,6 +38,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 12,
   },
   verticallySpaced: {
     paddingTop: 4,
@@ -48,8 +50,11 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  logo: {
+    fontFamily: "BebasNeue_400Regular",
+    fontSize: 72,
   },
 });
