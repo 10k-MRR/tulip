@@ -1,7 +1,11 @@
+import Button from "@/components/ui/button";
+import Input from "@/components/ui/input";
+import Text from "@/components/ui/text";
 import { supabase } from "@/utils/supabase";
 import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { View, StyleSheet, TextInput, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Otp() {
   const [code, setCode] = useState("");
@@ -22,41 +26,46 @@ export default function Otp() {
       router.replace("/");
     }
   }
-
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <TextInput
-          style={styles.input}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.card}>
+        <Text nueu fontSize={42}>
+          6-digit code
+        </Text>
+        <Text>A verification code has been sent to {email}</Text>
+        <Input
           onChangeText={(text) => setCode(text)}
           value={code}
           placeholder="0123"
-          autoCapitalize={"none"}
+          autoComplete="one-time-code"
+          keyboardType="number-pad"
+          returnKeyType="next"
         />
+        <Button title="Verify" onPress={verifyOtp} />
       </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button title="Sign in" onPress={() => verifyOtp()} />
-      </View>
-    </View>
+      <Text fontSize={24} nueu style={styles.logo}>
+        Tulip
+      </Text>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginHorizontal: 18,
+    justifyContent: "space-between",
   },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: "stretch",
+  card: {
+    backgroundColor: "white",
+    borderRadius: 12,
+    padding: 24,
   },
-  mt20: {
-    marginTop: 20,
+  logo: {
+    textAlign: "center",
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  separator: {
+    textAlign: "center",
+    marginVertical: 12,
   },
 });
