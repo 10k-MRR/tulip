@@ -1,6 +1,7 @@
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import Text from "@/components/ui/text";
+import { i18n } from "@/utils/i18n";
 import { supabase } from "@/utils/supabase";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -23,9 +24,9 @@ export default function Index() {
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
         <Text nueu fontSize={42}>
-          Sign in
+          {i18n.t("auth.signin")}
         </Text>
-        <Text>Enter your email address to sign into your tulip account</Text>
+        <Text>{i18n.t("auth.enterEmail")}</Text>
         <Input
           onChangeText={(text) => setEmail(text)}
           value={email}
@@ -34,11 +35,11 @@ export default function Index() {
           keyboardType="email-address"
           returnKeyType="next"
         />
-        <Button title="Sign in" onPress={signInWithEmail} />
+        <Button title={i18n.t("auth.signin")} onPress={signInWithEmail} />
         <Text fontSize={16} nueu style={styles.separator}>
-          or
+          {i18n.t("auth.or")}
         </Text>
-        <Button title="Sign in with apple" onPress={signInWithEmail} />
+        <Button title={i18n.t("auth.appleSignin")} onPress={signInWithEmail} />
       </View>
       <Text fontSize={24} nueu style={styles.logo}>
         Tulip

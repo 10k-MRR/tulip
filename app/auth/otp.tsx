@@ -1,6 +1,7 @@
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import Text from "@/components/ui/text";
+import { i18n } from "@/utils/i18n";
 import { supabase } from "@/utils/supabase";
 import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
@@ -30,18 +31,20 @@ export default function Otp() {
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
         <Text nueu fontSize={42}>
-          6-digit code
+          {i18n.t("auth.digit")}
         </Text>
-        <Text>A verification code has been sent to {email}</Text>
+        <Text>
+          {i18n.t("auth.enterCode")} {email}
+        </Text>
         <Input
           onChangeText={(text) => setCode(text)}
           value={code}
-          placeholder="0123"
+          placeholder="012345"
           autoComplete="one-time-code"
           keyboardType="number-pad"
           returnKeyType="next"
         />
-        <Button title="Verify" onPress={verifyOtp} />
+        <Button title={i18n.t("auth.verify")} onPress={verifyOtp} />
       </View>
       <Text fontSize={24} nueu style={styles.logo}>
         Tulip
