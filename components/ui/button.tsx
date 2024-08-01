@@ -36,5 +36,6 @@ const ls = (textColor: string, backgroundColor: string) =>
     },
     text: {
       color: textColor,
+      fontSize: 16,
     },
   });

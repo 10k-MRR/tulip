@@ -6,6 +6,7 @@ import { supabase } from "@/utils/supabase";
 import { router } from "expo-router";
 import { useState } from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
+import * as AppleAuthentication from "expo-apple-authentication";
 
 export default function Index() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,26 @@ export default function Index() {
     });
     if (error === null) {
       router.replace("/auth/otp?email=" + email);
+    }
+  }
+
+  async function signInWithApple() {
+    const credential = await AppleAuthentication.signInAsync({
+      requestedScopes: [
+        AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+        AppleAuthentication.AppleAuthenticationScope.EMAIL,
+      ],
+    });
+
+    if (credential.identityToken) {
+      const { error } = await supabase.auth.signInWithIdToken({
+        provider: "apple",
+        token: credential.identityToken,
+      });
+
+      if (!error) {
+        router.replace("/");
+      }
     }
   }
 
@@ -39,7 +60,15 @@ export default function Index() {
         <Text fontSize={16} nueu style={styles.separator}>
           {i18n.t("auth.or")}
         </Text>
-        <Button title={i18n.t("auth.appleSignin")} onPress={signInWithEmail} />
+        <AppleAuthentication.AppleAuthenticationButton
+          buttonType={
+            AppleAuthentication.AppleAuthenticationButtonType.CONTINUE
+          }
+          buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+          cornerRadius={4}
+          style={styles.appleButton}
+          onPress={signInWithApple}
+        />
       </View>
       <Text fontSize={24} nueu style={styles.logo}>
         Tulip
@@ -65,5 +94,8 @@ const styles = StyleSheet.create({
   separator: {
     textAlign: "center",
     marginVertical: 12,
+  },
+  appleButton: {
+    height: 42,
   },
 });
