@@ -1,45 +1,37 @@
 import { connectAccountsForOneTimeAccessListner } from "@/modules/tink-link-native";
 import { supabase } from "@/utils/supabase";
-import { Session } from "@supabase/supabase-js";
-import { SplashScreen, Stack, router } from "expo-router";
-import { useEffect, useState } from "react";
+import { SplashScreen, Stack, router, usePathname } from "expo-router";
+import { useEffect } from "react";
 import { BebasNeue_400Regular, useFonts } from "@expo-google-fonts/bebas-neue";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const pathname = usePathname();
   const [loaded, error] = useFonts({
     BebasNeue_400Regular,
   });
-  const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (!session || !session.user) {
-        router.replace("/onboarding/");
-      }
-    });
+    if (loaded || error) {
+      SplashScreen.hideAsync();
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (!session || !session.user) {
-        router.replace("/onboarding/");
-      }
-    });
+      supabase.auth.onAuthStateChange((_event, session) => {
+        if ((!session || !session.user) && pathname !== "/auth/") {
+          router.replace("/auth/");
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, error]);
 
+  useEffect(() => {
     const sub = connectAccountsForOneTimeAccessListner((e) => {
       console.log(e);
     });
 
     return () => sub.remove();
   }, []);
-
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
 
   if (!loaded && !error) {
     return null;
