@@ -13,6 +13,13 @@ const i18n = new I18n({
       enterCode: "A verification code has been sent to ",
       verify: "verify",
     },
+    onboarding: {
+      step1: {
+        title: "What's yout name?",
+        desc: "What would you like us to call you? You can choose your real name or a name you've always dreamed of having.",
+        button: "Next",
+      },
+    },
   },
   fr: {
     auth: {
@@ -24,6 +31,13 @@ const i18n = new I18n({
       digit: "Code à 6 chiffres",
       enterCode: "Un code de vérification a été envoyé à ",
       verify: "Vérifier",
+    },
+    onboarding: {
+      step1: {
+        title: "Quel est ton nom ?",
+        desc: "Comment souhaites-tu que nous t'appelions ? Tu peux choisir ton vrai nom ou un nom dont tu as toujours rêvé.",
+        button: "Suivant",
+      },
     },
   },
 });

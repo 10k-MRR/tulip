@@ -1,6 +1,7 @@
 import { Slot, usePathname } from "expo-router";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { PageIndicator } from "react-native-page-indicator";
+import Text from "@/components/ui/text";
 
 export default function OnboardingLayout() {
   const pathname = usePathname();
@@ -21,6 +22,11 @@ export default function OnboardingLayout() {
         />
       </SafeAreaView>
       <Slot />
+      <SafeAreaView style={styles.header}>
+        <Text fontSize={24} nueu>
+          Tulip
+        </Text>
+      </SafeAreaView>
     </>
   );
 }
@@ -29,6 +35,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "white",
   },
   indicators: {
     marginTop: 24,
