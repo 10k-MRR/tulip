@@ -17,14 +17,14 @@ export default function RootLayout() {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       if (!session || !session.user) {
-        router.replace("/auth/");
+        router.replace("/onboarding/");
       }
     });
 
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       if (!session || !session.user) {
-        router.replace("/auth/");
+        router.replace("/onboarding/");
       }
     });
 
