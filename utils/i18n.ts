@@ -15,9 +15,17 @@ const i18n = new I18n({
     },
     onboarding: {
       step1: {
-        title: "What's yout name?",
+        title: "What's your name?",
         desc: "What would you like us to call you? You can choose your real name or a name you've always dreamed of having.",
         button: "Next",
+      },
+      step2: {
+        title: "What's your gender?",
+        desc: "How do you define yourself ? you can skip this question if you don't feel comfortable to let us know.",
+        button: "Next",
+        skip: "Skip the question",
+        male: "Male",
+        female: "Female",
       },
     },
   },
@@ -37,6 +45,14 @@ const i18n = new I18n({
         title: "Quel est ton nom ?",
         desc: "Comment souhaites-tu que nous t'appelions ? Tu peux choisir ton vrai nom ou un nom dont tu as toujours rêvé.",
         button: "Suivant",
+      },
+      step2: {
+        title: "Quel est ton genre ?",
+        desc: "Comment te définis-tu ? Tu peux sauter cette question si tu ne te sens pas à l'aise de nous le faire savoir.",
+        button: "Suivant",
+        skip: "Passer la question",
+        male: "Homme",
+        female: "Femme",
       },
     },
   },
