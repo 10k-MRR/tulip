@@ -1,7 +1,7 @@
 import { View, StyleSheet, Pressable } from "react-native";
 import Text from "@/components/ui/text";
 import Button from "@/components/ui/button";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import { useState } from "react";
 import { i18n } from "@/utils/i18n";
@@ -11,6 +11,8 @@ export default function Gender() {
   const [maleSelected, setMaleSelected] = useState(false);
   const [femaleSelected, setFemaleSelected] = useState(false);
 
+  const { name } = useLocalSearchParams<{ name: string }>();
+
   const localStyles = ls(
     useThemeColor({}, "bg"),
     useThemeColor({}, "cardBg"),
@@ -19,7 +21,13 @@ export default function Gender() {
   );
 
   function onNextPressed() {
-    router.push("/onboarding/steps/link");
+    let gender = "skip";
+    if (maleSelected) {
+      gender = "male";
+    } else if (femaleSelected) {
+      gender = "female";
+    }
+    router.push(`/onboarding/steps/link?name=${name}&gender=${gender}`);
   }
 
   function onMalePressed() {

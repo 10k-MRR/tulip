@@ -10,7 +10,7 @@ export default function Index() {
   const [name, setName] = useState("");
 
   function onNextPressed() {
-    router.push("/onboarding/steps/gender");
+    router.push("/onboarding/steps/gender?name=" + name);
   }
 
   return (

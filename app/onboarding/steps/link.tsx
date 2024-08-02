@@ -1,9 +1,16 @@
 import { View, StyleSheet } from "react-native";
 import Text from "@/components/ui/text";
 import Button from "@/components/ui/button";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 export default function Index() {
+  const { name, gender } = useLocalSearchParams<{
+    name: string;
+    gender: string;
+  }>();
+
+  console.log(name, gender);
+
   function onNextPressed() {
     router.push("/onboarding/");
   }
