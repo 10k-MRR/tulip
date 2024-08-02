@@ -1,12 +1,26 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import Text from "@/components/ui/text";
 import Button from "@/components/ui/button";
 import { router } from "expo-router";
 import { Image } from "expo-image";
+import { useState } from "react";
 
 export default function Gender() {
+  const [maleSelected, setMaleSelected] = useState(false);
+  const [femaleSelected, setFemaleSelected] = useState(false);
+
   function onNextPressed() {
     router.push("/onboarding/steps/link");
+  }
+
+  function onMalePressed() {
+    setMaleSelected(!maleSelected);
+    setFemaleSelected(false);
+  }
+
+  function onFemalePressed() {
+    setFemaleSelected(!femaleSelected);
+    setMaleSelected(false);
   }
 
   return (
@@ -19,8 +33,10 @@ export default function Gender() {
         dreamed to have
       </Text>
       <View style={styles.genderContainer}>
-        <View style={{ flex: 1, height: 220 }}>
-          <View style={styles.genderCard}>
+        <Pressable style={{ flex: 1, height: 220 }} onPress={onMalePressed}>
+          <View
+            style={[styles.genderCard, maleSelected && styles.maleSelected]}
+          >
             <Image
               style={styles.image}
               source={require("../../../assets/images/male_gender.png")}
@@ -31,9 +47,11 @@ export default function Gender() {
           <Text style={{ marginTop: 8 }} nueu fontSize={16}>
             Male
           </Text>
-        </View>
-        <View style={{ flex: 1, height: 220 }}>
-          <View style={styles.genderCard}>
+        </Pressable>
+        <Pressable style={{ flex: 1, height: 220 }} onPress={onFemalePressed}>
+          <View
+            style={[styles.genderCard, femaleSelected && styles.femaleSelected]}
+          >
             <Image
               style={styles.image2}
               source={require("../../../assets/images/woman_gender.png")}
@@ -44,9 +62,13 @@ export default function Gender() {
           <Text style={{ marginTop: 8 }} nueu fontSize={16}>
             Female
           </Text>
-        </View>
+        </Pressable>
       </View>
-      <Button title="next" onPress={onNextPressed} />
+      <Button
+        title="next"
+        onPress={onNextPressed}
+        disabled={!maleSelected && !femaleSelected}
+      />
     </View>
   );
 }
@@ -71,6 +93,12 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 8,
     height: 220,
+  },
+  maleSelected: {
+    backgroundColor: "#8ADAB2",
+  },
+  femaleSelected: {
+    backgroundColor: "#FCC8D1",
   },
   image: {
     flex: 1,

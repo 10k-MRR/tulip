@@ -14,23 +14,38 @@ interface IProps extends PressableProps {
   style?: ViewStyle;
 }
 
-export default function Button({ title, onPress, isLoading, style }: IProps) {
+export default function Button({
+  title,
+  onPress,
+  isLoading,
+  style,
+  disabled = false,
+}: IProps) {
   const localStyles = ls(
     useThemeColor({}, "buttonText"),
     useThemeColor({}, "buttonBackground"),
+    useThemeColor({}, "buttonDisabled"),
   );
 
   return (
-    <Pressable style={[style, localStyles.container]} onPress={onPress}>
+    <Pressable
+      style={[style, localStyles.container, disabled && localStyles.disabled]}
+      onPress={onPress}
+      disabled={disabled}
+    >
       {isLoading && (
         <LoaderKit style={localStyles.loader} name="BallScaleMultiple" />
       )}
-      {!isLoading && <Text style={localStyles.text}>{title}</Text>}
+      {!isLoading && <Text style={[localStyles.text]}>{title}</Text>}
     </Pressable>
   );
 }
 
-const ls = (textColor: string, backgroundColor: string) =>
+const ls = (
+  textColor: string,
+  backgroundColor: string,
+  backgroundDisabledColor: string,
+) =>
   StyleSheet.create({
     container: {
       height: 42,
@@ -46,5 +61,8 @@ const ls = (textColor: string, backgroundColor: string) =>
     loader: {
       height: 24,
       width: 24,
+    },
+    disabled: {
+      backgroundColor: backgroundDisabledColor,
     },
   });
