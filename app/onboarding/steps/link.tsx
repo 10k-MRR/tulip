@@ -1,8 +1,13 @@
 import { View, StyleSheet } from "react-native";
 import Text from "@/components/ui/text";
 import Button from "@/components/ui/button";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { i18n } from "@/utils/i18n";
+import {
+  connectAccountsForOneTimeAccess,
+  connectAccountsForOneTimeAccessListner,
+} from "@/modules/tink-link-native";
+import { useEffect } from "react";
 
 export default function Index() {
   const { name, gender } = useLocalSearchParams<{
@@ -10,20 +15,35 @@ export default function Index() {
     gender: string;
   }>();
 
-  console.log(name, gender);
+  useEffect(() => {
+    const sub = connectAccountsForOneTimeAccessListner((e) => {
+      console.log(e.authCode);
+      if (e.authCode !== null) {
+        router.push(
+          `/onboarding/steps/succeed?name=${name}&gender=${gender}&code=${e.authCode}`,
+        );
+      }
+    });
+
+    return () => sub.remove();
+  }, []);
 
   function onLinkPressed() {
-    console.log("Link");
+    connectAccountsForOneTimeAccess(
+      process.env.EXPO_PUBLIC_TINK_CLIENT_ID!,
+      process.env.EXPO_PUBLIC_TINK_REDIRECT_URL!,
+    );
   }
 
   return (
     <View style={styles.container}>
       <Text nueu fontSize={42}>
-        {i18n.t("onboarding.step1.title")}
+        {i18n.t("onboarding.step3.title")}
       </Text>
-      <Text>{i18n.t("onboarding.step1.desc")}</Text>
+      <Text>{i18n.t("onboarding.step3.desc")}</Text>
       <Button
-        title={i18n.t("onboarding.step1.button")}
+        style={styles.button}
+        title={i18n.t("onboarding.step3.button")}
         onPress={onLinkPressed}
       />
     </View>
@@ -36,8 +56,7 @@ const styles = StyleSheet.create({
     padding: 24,
     backgroundColor: "white",
   },
-  wrapper: {
-    alignItems: "center",
-    justifyContent: "center",
+  button: {
+    marginTop: 12,
   },
 });

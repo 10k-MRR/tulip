@@ -27,6 +27,15 @@ const i18n = new I18n({
         male: "Male",
         female: "Female",
       },
+      step3: {
+        title: "Link your bank account",
+        desc: "We need your banking information to analyze and provide insights into your finances.",
+        button: "Connect your account",
+      },
+      step4: {
+        title: "Account succesfully linked",
+        desc: "You successfully passed the onboarding process ! we setup your account, it can takes few seconds.",
+      },
     },
   },
   fr: {
@@ -53,6 +62,15 @@ const i18n = new I18n({
         skip: "Passer la question",
         male: "Homme",
         female: "Femme",
+      },
+      step3: {
+        title: "Connecte ton compte bancaire",
+        desc: "Nous avons besoin de tes informations bancaires pour analyser et fournir des aperçus de tes finances.",
+        button: "Connecter votre compte",
+      },
+      step4: {
+        title: "Compte lié avec succès",
+        desc: "Tu as réussi le processus d'onboarding ! Nous configurons ton compte, cela peut prendre quelques secondes.",
       },
     },
   },

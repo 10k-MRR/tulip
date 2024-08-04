@@ -1,4 +1,3 @@
-import { connectAccountsForOneTimeAccessListner } from "@/modules/tink-link-native";
 import { supabase } from "@/utils/supabase";
 import { SplashScreen, Stack, router, usePathname } from "expo-router";
 import { useEffect, useState } from "react";
@@ -41,14 +40,6 @@ export default function RootLayout() {
         }
       });
   }, [session]);
-
-  useEffect(() => {
-    const sub = connectAccountsForOneTimeAccessListner((e) => {
-      console.log(e);
-    });
-
-    return () => sub.remove();
-  }, []);
 
   if (!loaded && !error) {
     return null;

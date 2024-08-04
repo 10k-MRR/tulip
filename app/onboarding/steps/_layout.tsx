@@ -6,6 +6,7 @@ export default function OnboardingLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="gender" />
       <Stack.Screen name="link" />
+      <Stack.Screen name="succeed" />
     </Stack>
   );
 }

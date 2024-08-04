@@ -1,4 +1,5 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -27,10 +28,19 @@ export default function Button({
     useThemeColor({}, "buttonDisabled"),
   );
 
+  const [pressed, setPressed] = useState(false);
+
   return (
     <Pressable
-      style={[style, localStyles.container, disabled && localStyles.disabled]}
+      style={[
+        style,
+        localStyles.container,
+        disabled && localStyles.disabled,
+        pressed && localStyles.pressed,
+      ]}
       onPress={onPress}
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
       disabled={disabled}
     >
       {isLoading && (
@@ -64,5 +74,8 @@ const ls = (
     },
     disabled: {
       backgroundColor: backgroundDisabledColor,
+    },
+    pressed: {
+      opacity: 0.5,
     },
   });

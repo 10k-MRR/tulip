@@ -9,6 +9,7 @@ export default function OnboardingLayout() {
     "/onboarding/steps",
     "/onboarding/steps/gender",
     "/onboarding/steps/link",
+    "/onboarding/steps/succeed",
   ];
 
   return (
@@ -17,7 +18,7 @@ export default function OnboardingLayout() {
         <PageIndicator
           style={styles.indicators}
           variant="train"
-          count={3}
+          count={4}
           current={routes.indexOf(pathname)}
         />
       </SafeAreaView>
